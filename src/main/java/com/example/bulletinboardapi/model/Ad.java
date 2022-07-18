@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity(name = "ads")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Add {
+public class Ad {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
