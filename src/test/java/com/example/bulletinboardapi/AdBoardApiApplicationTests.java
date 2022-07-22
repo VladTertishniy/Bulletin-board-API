@@ -98,5 +98,4 @@ class AdBoardApiApplicationTests {
 	private Ad createAd(long id) {
 		return createAd(id, "Title", "Content");
 	}
-
 }
