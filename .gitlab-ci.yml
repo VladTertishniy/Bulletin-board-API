@@ -18,7 +18,7 @@ test:
   stage: test
   script:
     # - 'mvn --settings $MAVEN_SETTINGS test'
-    - sudo ./mvnw test
+   ./mvnw test
   cache:
     paths:
       - ./target
