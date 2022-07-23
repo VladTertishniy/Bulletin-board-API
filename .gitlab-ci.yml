@@ -1,13 +1,13 @@
 default:
   image: amazoncorretto:17.0.3
 
-
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=./.m2/repository"
   CI_JOB_NAME: "testt"
 
 stages:
   - test
+  - build
 
 cache:
   paths:
@@ -17,20 +17,15 @@ cache:
 test:
   stage: test
   script:
-    # - 'mvn --settings $MAVEN_SETTINGS test'
    ./mvnw test
   cache:
     paths:
       - ./target
       - ./.m2
 
-# before_script:
-#     - chmod +x mvnw
-#     - export MAVEN_USER_HOME=`pwd`/.maven
-#     - ./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-npm -DnodeVersion=v10.13.0 -DnpmVersion=6.4.1 -Dmaven.repo.local=$MAVEN_USER_HOME
-#     - ./mvnw com.github.eirslett:frontend-maven-plugin:npm -Dmaven.repo.local=$MAVEN_USER_HOME
-
-# run_tests:
-#   stage: test
-#   script: 
-#       - 'mvn verify'
+docker_build:
+  stage: build
+  script:
+    - docker build -t my-docker-image .
+    # - docker build -t example.com/example-image:latest .
+    # - docker push example.com/example-image:latest
