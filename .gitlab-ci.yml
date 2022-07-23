@@ -27,7 +27,7 @@ docker_build:
   stage: build
   script:
     # - docker build -t my-docker-image
-    - docker build -t Dockerfile
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/bulletin-board-api ./
   image: docker:latest
   services:
     - docker:18.09.7-dind
