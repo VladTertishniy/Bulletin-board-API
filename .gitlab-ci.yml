@@ -26,6 +26,9 @@ test:
 docker_build:
   stage: build
   script:
-    - docker build -t my-docker-image .
+    - docker build -t my-docker-image
+  # image: docker:latest
+  # services:
+  #   - docker:18.09.7-dind
     # - docker build -t example.com/example-image:latest .
     # - docker push example.com/example-image:latest
