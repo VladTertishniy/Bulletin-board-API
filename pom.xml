@@ -41,9 +41,9 @@
 		</profile>
 		<profile>
 			<id>prod</id>
-			<properties>
-				<maven.test.skip>true</maven.test.skip>
-			</properties>
+<!--			<properties>-->
+<!--				<maven.test.skip>true</maven.test.skip>-->
+<!--			</properties>-->
 		</profile>
 	</profiles>
 	<repositories>

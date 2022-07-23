@@ -16,15 +16,3 @@ spring:
       settings:
         trace: false
         web-allow-others: false
-#spring:
-#  application:
-#    name: user-service
-#  datasource:
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://postgres-db:5432/currencyExchange
-#    username: postgres
-#    password: admin
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
