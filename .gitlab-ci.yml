@@ -6,7 +6,7 @@ variables:
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
 
 stages:
-  # - test
+  - test
   - build
   - deploy
 
@@ -32,9 +32,9 @@ cache:
     - if: $CI_COMMIT_BRANCH == $PROD_BRANCH_NAME
 
 .build_image:
-  image: docker:19
+  image: docker:20.10.16
   services:
-    - docker:19-dind
+    - docker:20.10.16-dind
   stage: build
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -62,10 +62,10 @@ cache:
 
 # Jobs
 
-# run_tests:
-#   image: amazoncorretto:17.0.3
-#   stage: test
-#   script: ./mvnw test $MAVEN_OPTS
+run_tests:
+  image: amazoncorretto:17.0.3
+  stage: test
+  script: ./mvnw test $MAVEN_OPTS
 
 build_image_dev:
   extends:
