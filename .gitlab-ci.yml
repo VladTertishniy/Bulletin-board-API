@@ -38,7 +38,7 @@ cache:
   stage: build
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-	  - apk update && apk add openjdk17-jre
+    - apk update && apk add openjdk17-jre
   script:
     - ./mvnw package -P$MAVEN_PROFILE -Dmaven.test.skip $MAVEN_OPTS
     - docker build -t $IMAGE_NAME_TAG ./
