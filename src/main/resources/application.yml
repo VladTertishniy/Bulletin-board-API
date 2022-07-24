@@ -14,3 +14,19 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+server:
+  port: 9000
+---
+spring:
+  config:
+    activate:
+      on-profile: "dev"
+server:
+  port: 8082
+---
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+server:
+  port: 8083
