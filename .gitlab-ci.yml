@@ -1,31 +1,89 @@
-default:
-  image: amazoncorretto:17.0.3
-
 variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=./.m2/repository"
-  CI_JOB_NAME: "testt"
+  IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/bulletin-board-api-$MAVEN_PROFILE
+  IMAGE_TAG: latest
+  IMAGE_NAME_TAG: $IMAGE_NAME:$IMAGE_TAG
+  PROD_BRANCH_NAME: master
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  DOCKER_TLS_CERTDIR: "/certs"
 
 stages:
   - test
   - build
+  - deploy
 
 cache:
   paths:
     - .m2/repository
   key: "$CI_JOB_NAME"
 
-test:
-  stage: test
-  script:
-   ./mvnw test
-  cache:
-    paths:
-      - ./target
-      - ./.m2
+# Job templates
 
-docker_build:
+.dev:
+  variables:
+    MAVEN_PROFILE: dev
+    APPLICATION_PORT: 8083
+  rules:
+    - if: $CI_COMMIT_BRANCH != $PROD_BRANCH_NAME
+
+.prod:
+  variables:
+    MAVEN_PROFILE: prod
+    APPLICATION_PORT: 8082
+  rules:
+    - if: $CI_COMMIT_BRANCH == $PROD_BRANCH_NAME
+
+.build_image:
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
   stage: build
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - apk update && apk add openjdk17-jre
   script:
-    - docker build -t my-docker-image .
-    # - docker build -t example.com/example-image:latest .
-    # - docker push example.com/example-image:latest
+    - ./mvnw package -P$MAVEN_PROFILE -Dmaven.test.skip $MAVEN_OPTS
+    - docker build -t $IMAGE_NAME_TAG .
+    - docker push $IMAGE_NAME_TAG
+
+.deploy_image:
+  image: alpine:3.16.1
+  stage: deploy
+  variables:
+    CONTAINER_NAME: bulletin-board-api-$MAVEN_PROFILE
+  before_script:
+    - apk update && apk add openssh-client
+    - chmod 400 $DEPLOY_SERVER_SSH_KEY_PATH
+  script:
+    - ssh -i $DEPLOY_SERVER_SSH_KEY_PATH -o StrictHostKeyChecking=no $DEPLOY_SERVER_USER@$DEPLOY_SERVER_ADDRESS "
+        sudo docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY &&
+        sudo docker stop $CONTAINER_NAME || true &&
+        sudo docker rm $CONTAINER_NAME || true &&
+        sudo docker run -d -p $APPLICATION_PORT:$APPLICATION_PORT --name $CONTAINER_NAME $IMAGE_NAME_TAG"
+  when: manual
+
+# Jobs
+
+run_tests:
+  image: amazoncorretto:17.0.3
+  stage: test
+  script: ./mvnw test $MAVEN_OPTS
+
+build_image_dev:
+  extends:
+    - .build_image
+    - .dev
+
+build_image_prod:
+  extends:
+    - .build_image
+    - .prod
+
+deploy_image_dev:
+  extends:
+    - .deploy_image
+    - .dev
+
+deploy_image_prod:
+  extends:
+    - .deploy_image
+    - .prod
