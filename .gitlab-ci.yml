@@ -36,6 +36,8 @@ cache:
   services:
     - docker:20.10.16-dind
   stage: build
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - apk update && apk add openjdk17-jre
