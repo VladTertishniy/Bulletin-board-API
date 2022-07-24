@@ -41,7 +41,7 @@ cache:
     - apk update && apk add openjdk17-jre
   script:
     - ./mvnw package -P$MAVEN_PROFILE -Dmaven.test.skip $MAVEN_OPTS
-    - docker build -t $IMAGE_NAME_TAG ./
+    - docker build -t $IMAGE_NAME_TAG .
     - docker push $IMAGE_NAME_TAG
 
 .deploy_image:
