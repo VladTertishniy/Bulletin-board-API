@@ -1,5 +1,5 @@
 variables:
-  IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/Bulletin-board-API-$MAVEN_PROFILE
+  IMAGE_NAME: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/bulletin-board-api-$MAVEN_PROFILE
   IMAGE_TAG: latest
   IMAGE_NAME_TAG: $IMAGE_NAME:$IMAGE_TAG
   PROD_BRANCH_NAME: master
@@ -48,7 +48,7 @@ cache:
   image: alpine:3.16.1
   stage: deploy
   variables:
-    CONTAINER_NAME: Bulletin-board-API-$MAVEN_PROFILE
+    CONTAINER_NAME: bulletin-board-api-$MAVEN_PROFILE
   before_script:
     - apk update && apk add openssh-client
     - chmod 400 $DEPLOY_SERVER_SSH_KEY_PATH
