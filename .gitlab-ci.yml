@@ -4,6 +4,7 @@ variables:
   IMAGE_NAME_TAG: $IMAGE_NAME:$IMAGE_TAG
   PROD_BRANCH_NAME: master
   MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  DOCKER_TLS_CERTDIR: "/certs"
 
 stages:
   - test
@@ -12,7 +13,7 @@ stages:
 
 cache:
   paths:
-    - ~/.m2/repository
+    - .m2/repository
   key: "$CI_JOB_NAME"
 
 # Job templates
@@ -36,8 +37,6 @@ cache:
   services:
     - docker:20.10.16-dind
   stage: build
-  variables:
-    DOCKER_TLS_CERTDIR: "/certs"
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - apk update && apk add openjdk17-jre
