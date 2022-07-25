@@ -24,11 +24,11 @@ spring:
     activate:
       on-profile: "dev"
 server:
-  port: 8082
+  port: 9082
 ---
 spring:
   config:
     activate:
       on-profile: "prod"
 server:
-  port: 8083
+  port: 9083
