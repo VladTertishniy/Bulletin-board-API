@@ -20,14 +20,14 @@ cache:
 .dev:
   variables:
     MAVEN_PROFILE: dev
-    APPLICATION_PORT: 8083
+    APPLICATION_PORT: 9083
   rules:
     - if: $CI_COMMIT_BRANCH != $PROD_BRANCH_NAME
 
 .prod:
   variables:
     MAVEN_PROFILE: prod
-    APPLICATION_PORT: 8082
+    APPLICATION_PORT: 9082
   rules:
     - if: $CI_COMMIT_BRANCH == $PROD_BRANCH_NAME
 
