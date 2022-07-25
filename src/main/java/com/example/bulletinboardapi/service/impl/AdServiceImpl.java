@@ -1,9 +1,9 @@
 package com.example.bulletinboardapi.service.impl;
 
-import com.example.bulletinboardapi.DTO.AdRequestDTO;
+import com.example.bulletinboardapi.dto.AdRequestDTO;
 import com.example.bulletinboardapi.mapper.AdMapper;
 import com.example.bulletinboardapi.model.Ad;
-import com.example.bulletinboardapi.DTO.AdResponseDTO;
+import com.example.bulletinboardapi.dto.AdResponseDTO;
 import com.example.bulletinboardapi.repository.AdRepository;
 import com.example.bulletinboardapi.service.AdService;
 import lombok.AllArgsConstructor;

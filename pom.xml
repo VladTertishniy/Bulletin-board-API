@@ -34,6 +34,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
+				<maven-properties.file>src/main/resources/application-dev.yml</maven-properties.file>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -41,9 +42,10 @@
 		</profile>
 		<profile>
 			<id>prod</id>
-<!--			<properties>-->
+			<properties>
 <!--				<maven.test.skip>true</maven.test.skip>-->
-<!--			</properties>-->
+				<maven-properties.file>src/main/resources/application-prod.yml</maven-properties.file>
+			</properties>
 		</profile>
 	</profiles>
 	<repositories>

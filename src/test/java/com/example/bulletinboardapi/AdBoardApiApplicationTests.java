@@ -1,7 +1,7 @@
 package com.example.bulletinboardapi;
 
-import com.example.bulletinboardapi.DTO.AdRequestDTO;
-import com.example.bulletinboardapi.DTO.AdResponseDTO;
+import com.example.bulletinboardapi.dto.AdRequestDTO;
+import com.example.bulletinboardapi.dto.AdResponseDTO;
 import com.example.bulletinboardapi.exceptions.AdIdNotFoundException;
 import com.example.bulletinboardapi.model.Ad;
 import com.example.bulletinboardapi.repository.AdRepository;

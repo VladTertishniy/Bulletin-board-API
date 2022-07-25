@@ -1,4 +1,4 @@
-package com.example.bulletinboardapi.DTO;
+package com.example.bulletinboardapi.dto;
 
 
 import lombok.AllArgsConstructor;

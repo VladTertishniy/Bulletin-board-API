@@ -1,7 +1,7 @@
 package com.example.bulletinboardapi.service;
 
-import com.example.bulletinboardapi.DTO.AdRequestDTO;
-import com.example.bulletinboardapi.DTO.AdResponseDTO;
+import com.example.bulletinboardapi.dto.AdRequestDTO;
+import com.example.bulletinboardapi.dto.AdResponseDTO;
 
 import java.util.List;
 

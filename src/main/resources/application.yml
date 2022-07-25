@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    default: dev
   datasource:
     url: jdbc:h2:mem:bulletin
     username: sa
