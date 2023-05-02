@@ -61,14 +61,12 @@
 		<repository>
 			<id>sonatype-nexus-releases</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-			<layout>default</layout>
 		</repository>
 
 		<!-- GitHub Releases -->
 		<snapshotRepository>
 			<id>github-releases</id>
 			<url>https://maven.pkg.github.com/VladTertishniy/Bulletin-board-API</url>
-			<layout>default</layout>
 			<name>GitHub Package Registry</name>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
