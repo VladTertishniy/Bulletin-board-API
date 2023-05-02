@@ -37,7 +37,6 @@
 	</scm>
 
 	<artifactId>Bulletin-board-API</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Bulletin board API</name>
 	<description>Bulletin board API</description>
 	<properties>
