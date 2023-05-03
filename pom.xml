@@ -37,7 +37,7 @@
 	</scm>
 
 	<artifactId>Bulletin-board-API</artifactId>
-	<name>Bulletin board API</name>
+	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Bulletin board API</description>
 	<properties>
 		<java.version>17</java.version>
