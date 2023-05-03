@@ -118,7 +118,7 @@
 			</build>
 		</profile>
 	</profiles>
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>feed</id>
 			<url>https://pkgs.dev.azure.com/vkadtert/bulletin-board-api/_packaging/feed/maven/v1</url>
@@ -129,7 +129,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-	</repositories>
+	</repositories>-->
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
