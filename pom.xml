@@ -208,7 +208,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
@@ -217,7 +217,7 @@
 					<target>17</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
-			</plugin>
+			</plugin>-->
 			<plugin>
 				<groupId>org.jreleaser</groupId>
 				<artifactId>jreleaser-maven-plugin</artifactId>
@@ -252,7 +252,7 @@
 				</configuration>
 			</plugin>
 <!--			//-->
-			<plugin>
+			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-help-plugin</artifactId>
 				<version>3.2.0</version>
@@ -265,7 +265,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -275,6 +275,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven.plugin.version}</version>
 				<configuration>
+					<source>17</source>
+					<target>17</target>
+					<encoding>UTF-8</encoding>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.mapstruct</groupId>
